@@ -47,11 +47,8 @@ public class RoomController {
     }
 
     private void getAvailableRooms(){
-        for (Room r: service.getAvailableRooms()){
-            if(r.isAvailable()){
-                System.out.println(r);
-            }
-        }
+
+
     }
 
     private void updateRoomPrice (){
