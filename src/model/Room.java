@@ -24,12 +24,12 @@ public class Room {
         this.price = price;
     }
 
-    public int getRoom_id() {
+    public int getRoomId() {
         return roomId;
     }
 
-    public void setRoom_id(int room_id) {
-        this.roomId = room_id;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
     public RoomType getType() {
