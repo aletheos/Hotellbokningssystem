@@ -3,67 +3,67 @@ package model;
 import java.util.Date;
 
 public class Booking {
-    private int booking_id;
-    private Date start_date;
-    private Date end_date;
-    private int customer_id;
-    private int room_id;
+    private int bookingId;
+    private Date startDate;
+    private Date endDate;
+    private int customerId;
+    private int roomId;
 
-    public Booking(Date start_date, Date end_date, int customer_id, int room_id) {
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.customer_id = customer_id;
-        this.room_id = room_id;
+    public Booking(Date startDate, Date endDate, int customerId, int roomId) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.customerId = customerId;
+        this.roomId = roomId;
     }
 
-    public int getBooking_id() {
-        return booking_id;
+    public int getBookingId() {
+        return bookingId;
     }
 
-    public void setBooking_id(int booking_id) {
-        this.booking_id = booking_id;
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    public int getRoom_id() {
-        return room_id;
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setRoom_id(int room_id) {
-        this.room_id = room_id;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
     @Override
     public String toString() {
         return "Booking{" +
-                "booking_id=" + booking_id +
-                ", start_date=" + start_date +
-                ", end_date=" + end_date +
-                ", customer_id=" + customer_id +
-                ", room_id=" + room_id +
+                "booking_id=" + bookingId +
+                ", start_date=" + startDate +
+                ", end_date=" + endDate +
+                ", customer_id=" + customerId +
+                ", room_id=" + roomId +
                 '}';
     }
 }
