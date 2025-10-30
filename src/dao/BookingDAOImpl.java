@@ -18,18 +18,50 @@ public class BookingDAOImpl implements BookingDAO {
     * UPDATE    -> updateBooking()
     * DELETE    -> deleteBooking()
     * */
+
+    /*
+    * import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.ZonedDateTime;
+import java.util.Locale;
+
+// Aktuellt datum
+LocalDate idag = LocalDate.now();
+
+// Specifikt datum
+LocalDate datum = LocalDate.of(2025, 10, 30);
+
+// Formatera datum enligt svensk locale
+DateTimeFormatter svenskFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("sv", "SE"));
+String formateratDatum = idag.format(svenskFormat);
+
+// Eller med förvalt mönster för locale
+DateTimeFormatter localFormat = DateTimeFormatter.ofLocalizedDate(java.time.format.FormatStyle.FULL)
+    .withLocale(new Locale("sv", "SE"));
+String svensktDatum = idag.format(localFormat); // "torsdag 30 oktober 2025"
+
+// Parsa datum från sträng
+LocalDate parsatDatum = LocalDate.parse("2025-10-30", svenskFormat);
+
+    *
+    *
+    *
+    * */
+
+
     @Override
-    public void addBooking(LocalDate start_date, LocalDate end_date, int customer_id, int room_id){
+    public void addBooking(Booking booking){
 
         String sql = "INSERT INTO bookings(start_date, end_date, customer_id, room_id) VALUES( ?, ?, ?, ? )";
 
         try(Connection conn = Database.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)){
 
-            ps.setDate(1, Date.valueOf(start_date));
-            ps.setDate(2, Date.valueOf(end_date));
-            ps.setInt(3, customer_id);
-            ps.setInt(4, room_id);
+            ps.setDate(1, Date.valueOf(booking.getStartDate()));
+            ps.setDate(2, Date.valueOf(booking.getEndDate()));
+            ps.setInt(3, booking.getCustomerId());
+            ps.setInt(4, booking.getRoomId());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -49,8 +81,8 @@ public class BookingDAOImpl implements BookingDAO {
           ){
             while(rs.next()){
                 Booking booking = new Booking(
-                    rs.getDate("start_date"),
-                    rs.getDate("end_date"),
+                        rs.getDate("start_date").toLocalDate(),
+                        rs.getDate("end_date").toLocalDate(),
                     rs.getInt("customer_id"),
                     rs.getInt("room_id")
                 );
@@ -78,8 +110,8 @@ public class BookingDAOImpl implements BookingDAO {
             ResultSet rs = ps.executeQuery();
 
             booking = new Booking(
-                    rs.getDate("start_date"),
-                    rs.getDate("end_date"),
+                    rs.getDate("start_date").toLocalDate(),
+                    rs.getDate("end_date").toLocalDate(),
                     rs.getInt("customer_id"),
                     rs.getInt("room_id")
             );
@@ -93,37 +125,39 @@ public class BookingDAOImpl implements BookingDAO {
     }
 
     @Override
-    public void updateBooking( int booking_id, LocalDate start_date, LocalDate end_date, int customer_id, int room_id) {
+    public int updateBooking( Booking booking) {
 
         String sql = "INSERT INTO bookings( start_date, end_date, customer_id, room_id) VALUES( ?, ?, ?, ?) WHERE booking_id = ?";
 
         try ( Connection conn = Database.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
 
-            ps.setDate(1, Date.valueOf(start_date));
-            ps.setDate(2, Date.valueOf(end_date));
-            ps.setInt( 3, customer_id);
-            ps.setInt(4, room_id);
-            ps.setInt(5, booking_id);
-            ps.executeUpdate();
+            ps.setDate(1, Date.valueOf( booking.getStartDate()));
+            ps.setDate(2, Date.valueOf( booking.getEndDate()));
+            ps.setInt( 3, booking.getCustomerId());
+            ps.setInt(4, booking.getRoomId());
+            ps.setInt(5, booking.getBookingId());
+            return ps.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Update booking with id = " + booking_id +" failed.\n" + e.getMessage());
+            System.out.println("Update booking with id = " + booking.getBookingId() +" failed.\n" + e.getMessage());
         }
+        return 0;
     }
 
     @Override
-    public void deleteBooking(int booking_id) {
+    public int deleteBooking(int booking_id) {
 
         String sql = "DELETE FROM bookings WHERE booking_id = ?";
+        int response = -1;
 
         try (Connection conn = Database.getConnection();
         PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, booking_id);
-            ps.executeUpdate();
+            response = ps.executeUpdate();
 
         } catch (Exception e) {
             System.out.println("Delete booking with id = " + booking_id + " faild.\n" + e.getMessage());
         }
+        return response;
     }
-
 }
