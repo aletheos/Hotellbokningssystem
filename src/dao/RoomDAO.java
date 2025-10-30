@@ -1,15 +1,16 @@
 package dao;
 
+import db.Database;
 import model.Room;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 
 public interface RoomDAO {
+    void addRoom();
+    List<Room> getAllRooms();
+    List<Room> getAvailableRooms();
 
-    String sql = """
-            CREATE TABLE IF NOT EXISTS rooms(
-            room_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-            type ENUM('DOUBLE_ROOM', 'SINGLE_ROOM', 'FAMILY_ROOM') NOT NULL,
-            price DECIMAL(10,2))
-            """;
 }
