@@ -1,6 +1,8 @@
 package controller;
 
 
+import dao.CustomerDAO;
+import dao.CustomerDAOImpl;
 import model.Customer;
 import service.CustomerService;
 
@@ -10,10 +12,11 @@ import java.util.Scanner;
 public class CustomerController {
 
     private final CustomerService service;
-
     Scanner sc = new Scanner(System.in);
-    public CustomerController(CustomerService service) {
-        this.service = service;
+
+    public CustomerController() {
+        CustomerDAO dao = new CustomerDAOImpl();
+        this.service = new CustomerService(dao);
     }
 
     public void runMenu(){
@@ -23,8 +26,8 @@ public class CustomerController {
             System.out.println("1. Add customer");
             System.out.println("2. Show all customers");
             System.out.println("3. Find customer (by email)");
-            System.out.println("4. Change customer city (by email)");
-            System.out.println("5. Delete customer (by email)");
+            System.out.println("4. Change customer city (by id)");
+            System.out.println("5. Delete customer (by id)");
             System.out.println("0. Return");
 
             int input = getAnInt();
@@ -74,30 +77,28 @@ public class CustomerController {
     }
 
     private void deleteCustomer() {
-        System.out.println("Write the email of the customer you want to delete: ");
-        String email = sc.nextLine();
+        System.out.println("Write the id of the customer you want to delete: ");
+        int id = getAnInt();
 
-        if (service.deleteCustomer(email) > 0){
-            System.out.println("Successfully deleted customer with email: " + email);
-        } else System.out.println("No customer with the email " + email + " was found.");
+        if (service.deleteCustomer(id) > 0){
+            System.out.println("Successfully deleted customer with email: " + id);
+        } else System.out.println("No customer with " + id + " id was found.");
 
     }
 
     private void updateCustomerCity() {
-        System.out.println("Enter customer email: ");
-        String email = sc.nextLine();
+        System.out.println("Enter customer id: ");
+        int id = getAnInt();
         System.out.println("New city:");
         String city = sc.nextLine();
 
-        Optional<Customer> result = service.updateCustomerCity(email,city);
+        Optional<Customer> result = service.updateCustomerCity(id,city);
 
         result.ifPresent(p -> System.out.println("Updated: "+ p));
         if(result.isEmpty()){
-            System.out.println("No customer with the email " + email + " was found.");
+            System.out.println("No customer with " + id + " id was found.");
         }
     }
-
-
 
     private int getAnInt() {
         while(!sc.hasNextInt()){
@@ -108,7 +109,5 @@ public class CustomerController {
         sc.nextLine();
         return input;
     }
-
-
 
 }

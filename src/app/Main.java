@@ -26,10 +26,11 @@ public class Main {
         System.out.println(dao.getAllCustomers());
         // TEST-CODE! DELETE TO HERE
 
-        try {
-            Connection conn = Database.getConnection();
+        try  (Connection conn = Database.getConnection()) {
+            Hotel.getInstance().run();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+            System.out.println("Error connectin to Database: " + e.getMessage());
         }
         System.out.println("Done");
     }
