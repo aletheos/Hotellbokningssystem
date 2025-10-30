@@ -83,7 +83,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             statement.setString(1, city);
-            statement.setInt(2, customer.getCustomer_id());
+            statement.setInt(2, customer.getCustomerId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -97,7 +97,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             Connection connection = Database.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)
         ) {
-            statement.setInt(1, customer.getCustomer_id());
+            statement.setInt(1, customer.getCustomerId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
