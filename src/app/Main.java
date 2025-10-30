@@ -12,11 +12,15 @@ public class Main {
     public static void main(String[] args) {
         // TEST-CODE! DELETE FROM HERE
         CustomerDAO dao = new CustomerDAOImpl();
-        Customer customer = new Customer(100, "Grodan Boll", null, "Övik");
+        String email = "Boll@kråkfötter.nu";
+        Customer customer = new Customer(100, "Grodan Boll", email, "Övik");
         dao.addCustomer(customer);
-        dao.updateCustomerCity(customer.getCustomerId(), "Örnsköldsvik"); // den här kommer att ha fel customer_id
+        customer = dao.findCustomerByEmail(email);
+        dao.updateCustomerCity(customer.getCustomerId(), "Örnsköldsvik");
+        System.out.println();
+        System.out.println(dao.getAllCustomers());
         dao.deleteCustomer(customer.getCustomerId());
-        customer = dao.findCustomerByEmail("aletheos@outlook.com");
+        customer = dao.findCustomerByEmail(email);
         System.out.println(customer);
         System.out.println();
         System.out.println(dao.getAllCustomers());
