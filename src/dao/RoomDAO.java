@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoomDAO {
-    void addRoom();
+    void addRoom(Room room);
     List<Room> getAllRooms();
     List<Room> getAvailableRooms();
-
+    void updateRoomPrice(Room room, int id);
 }
