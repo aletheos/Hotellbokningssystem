@@ -1,15 +1,24 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Booking {
     private int bookingId;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int customerId;
     private int roomId;
 
-    public Booking(Date startDate, Date endDate, int customerId, int roomId) {
+    public Booking(LocalDate startDate, LocalDate endDate, int customerId, int roomId) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.customerId = customerId;
+        this.roomId = roomId;
+    }
+
+    public Booking(int booking_id, LocalDate startDate, LocalDate endDate, int customerId, int roomId) {
+        this.bookingId = booking_id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.customerId = customerId;
@@ -24,19 +33,19 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
