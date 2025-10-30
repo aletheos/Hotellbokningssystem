@@ -24,7 +24,14 @@ public class RoomController {
             int input = getAnInt();
 
             switch(input){
-
+                case 1 -> addRoom();
+                case 2 -> getAllRooms();
+                case 3 -> getAvailableRooms();
+                case 4 -> updateRoomPrice();
+                case 5 -> updateRoomType();
+                case 0 -> {
+                    return;
+                }
             }
         }
     }
@@ -47,8 +54,9 @@ public class RoomController {
     }
 
     private void getAvailableRooms(){
-
-
+        for (Room r: service.getAvailableRooms()){
+            System.out.println(r);
+        }
     }
 
     private void updateRoomPrice (){
@@ -60,7 +68,6 @@ public class RoomController {
         if ( result.isEmpty()){
             System.out.println("No room with this id " + id + " was found. ");
         }
-
     }
 
     private void updateRoomType(){
