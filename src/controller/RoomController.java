@@ -4,11 +4,16 @@ import model.Room;
 import service.RoomService;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class RoomController {
-    RoomService service = new RoomService();
+   public final RoomService service;
+    public RoomController(RoomService service) {
+        this.service = service;
+    }
+
     Scanner sc = new Scanner(System.in);
 
     public void runMenu (){
@@ -38,22 +43,22 @@ public class RoomController {
 
 
     private void addRoom(){
-        System.out.println("Name: ");
-        String name = sc.nextLine();
+
         System.out.println("Room type: ");
-        String type= sc.nextLine();
+        Room.RoomType type = Room.RoomType.valueOf(sc.nextLine().toUpperCase());
+
         System.out.println("Price: ");
         BigDecimal price = sc.nextBigDecimal();
 
-        service.addRoom(name, type, price);
+        service.addRoom(type, price);
     }
-    private void getAllRooms(){
+    private List<Room> getAllRooms(){
         for (Room r: service.getAllRooms()){
             System.out.println(r);
         }
     }
 
-    private void getAvailableRooms(){
+    private Optional<Room> getAvailableRooms(){
         for (Room r: service.getAvailableRooms()){
             System.out.println(r);
         }
@@ -62,7 +67,10 @@ public class RoomController {
     private void updateRoomPrice (){
         System.out.println("Enter room id: ");
         int id = sc.nextInt();
-        Optional<Room> result = service.updateRoomPrice(id);
+        System.out.println("Enter new price: ");
+        BigDecimal price = sc.nextBigDecimal();
+
+        Optional<Room> result = service.updateRoomPrice(id, price);
 
         result.ifPresent(r-> System.out.println("updated: " + r));
         if ( result.isEmpty()){
@@ -73,9 +81,11 @@ public class RoomController {
     private void updateRoomType(){
         System.out.println("Enter room id: ");
         int id = sc.nextInt();
-        Optional<Room> result = service.updateRoomType(id);
+        System.out.println("Enter new type: ");
+        Room.RoomType type = Room.RoomType.valueOf(sc.nextLine().toUpperCase());
+        Optional<Room> result = service.updateRoomType(id, type );
 
-        result.ifPresent(r -> System.out.println("Updated: " + id));
+        result.ifPresent(r -> System.out.println("Updated: " + r));
         if(result.isEmpty()){
             System.out.println("No room with the id: " + id + " is found. ");
         }
