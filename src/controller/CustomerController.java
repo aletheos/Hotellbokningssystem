@@ -99,15 +99,9 @@ public class CustomerController {
 
 
 
-
-
-
-
-
-
     private int getAnInt() {
         while(!sc.hasNextInt()){
-            System.out.println("ange ett heltal");
+            System.out.println("Write a number");
             sc.nextLine();
         }
         int input = sc.nextInt();
