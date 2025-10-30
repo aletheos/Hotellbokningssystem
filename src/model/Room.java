@@ -3,7 +3,7 @@ package model;
 import java.math.BigDecimal;
 
 public class Room {
-    private int room_id;
+    private int roomId;
     private RoomType type;
     private BigDecimal price;
 
@@ -18,18 +18,18 @@ public class Room {
         this.price = price;
     }
 
-    public Room(int room_id, RoomType type, BigDecimal price) {
-        this.room_id = room_id;
+    public Room(int roomId, RoomType type, BigDecimal price) {
+        this.roomId = roomId;
         this.type = type;
         this.price = price;
     }
 
     public int getRoom_id() {
-        return room_id;
+        return roomId;
     }
 
     public void setRoom_id(int room_id) {
-        this.room_id = room_id;
+        this.roomId = room_id;
     }
 
     public RoomType getType() {
@@ -51,7 +51,7 @@ public class Room {
     @Override
     public String toString() {
         return "Room{" +
-                "room_id=" + room_id +
+                "room_id=" + roomId +
                 ", type=" + type +
                 ", price=" + price +
                 '}';
