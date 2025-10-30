@@ -14,8 +14,8 @@ public class Main {
         CustomerDAO dao = new CustomerDAOImpl();
         Customer customer = new Customer(100, "Grodan Boll", null, "Övik");
         dao.addCustomer(customer);
-        dao.updateCustomerCity(customer, "Örnsköldsvik"); // den här kommer att ha fel customer_id
-        dao.deleteCustomer(customer);
+        dao.updateCustomerCity(customer.getCustomerId(), "Örnsköldsvik"); // den här kommer att ha fel customer_id
+        dao.deleteCustomer(customer.getCustomerId());
         customer = dao.findCustomerByEmail("aletheos@outlook.com");
         System.out.println(customer);
         System.out.println();

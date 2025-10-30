@@ -54,7 +54,9 @@ public class CustomerService {
     public int deleteCustomer(String email) {
         if (!isValidEmail(email)) return 0;
         String norm = normalizeEmail(email);
-        return dao.deleteCustomer(norm);
+        Customer customer = dao.findCustomerByEmail(norm);
+        int id = customer.getCustomerId();
+        return dao.deleteCustomer(id);
     }
 
     public Optional<Customer> updateCustomerCity(String email, String city) {
@@ -62,7 +64,9 @@ public class CustomerService {
             return Optional.empty();
         }
         String norm = normalizeEmail(email);
-        int updated = dao.updateCustomerCity(norm, city.trim());
+        Customer customer = dao.findCustomerByEmail(norm);
+        int id = customer.getCustomerId();
+        int updated = dao.updateCustomerCity(id, city.trim());
         if (updated > 0) {
             return Optional.ofNullable(dao.findCustomerByEmail(norm));
         }

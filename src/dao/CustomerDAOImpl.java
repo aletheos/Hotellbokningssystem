@@ -76,29 +76,29 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public void updateCustomerCity(Customer customer, String city) {
+    public int updateCustomerCity(int id, String city) {
         String sql = "UPDATE customers SET city = ? WHERE customer_id = ?";
         try(
             Connection connection = Database.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             statement.setString(1, city);
-            statement.setInt(2, customer.getCustomerId());
-            statement.executeUpdate();
+            statement.setInt(2, id);
+            return statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void deleteCustomer(Customer customer) {
+    public int deleteCustomer(int id) {
         String sql = "DELETE FROM customers WHERE customer_id = ?";
         try(
             Connection connection = Database.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)
         ) {
-            statement.setInt(1, customer.getCustomerId());
-            statement.executeUpdate();
+            statement.setInt(1, id);
+            return statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
