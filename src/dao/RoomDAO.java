@@ -1,17 +1,18 @@
 package dao;
 
-import db.Database;
 import model.Room;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 public interface RoomDAO {
-    void addRoom(Room.RoomType type, BigDecimal price);
+    int addRoom(Room room);
     List<Room> getAllRooms();
-    Optional<Room> getAvailableRooms();
-    void updateRoomPrice(int id, BigDecimal price);
+    List<Room> getAvailableRooms(LocalDate start, LocalDate end);
+    int updateRoomPrice(int roomId, BigDecimal price);
+    int  updateRoomType(int roomId, Room.RoomType newType);
+    Optional<Room> findById(int roomId);
 }

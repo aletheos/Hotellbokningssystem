@@ -10,11 +10,13 @@ import java.util.Scanner;
 
 public class RoomController {
    public final RoomService service;
+
+
+    Scanner sc = new Scanner(System.in);
+
     public RoomController(RoomService service) {
         this.service = service;
     }
-
-    Scanner sc = new Scanner(System.in);
 
     public void runMenu (){
         while(true){
