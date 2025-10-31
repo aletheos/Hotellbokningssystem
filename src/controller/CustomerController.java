@@ -81,7 +81,7 @@ public class CustomerController {
         int customer_id = getAnInt();
 
         if (service.deleteCustomer(customer_id) > 0){
-            System.out.println("Successfully deleted customer with email: " + customer_id);
+            System.out.println("Successfully deleted customer with id: " + customer_id);
         } else System.out.println("No customer with " + customer_id + " id was found.");
 
     }
