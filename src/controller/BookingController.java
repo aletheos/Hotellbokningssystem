@@ -80,9 +80,29 @@ public class BookingController {
 
     private void updateBooking(){
 
+        System.out.println("Enter booking id: ");
+        int booking_id = sc.nextInt();
+
+        System.out.println("Enter booking id: ");
+        LocalDate start_date = LocalDate.parse(sc.nextLine());
+
+        System.out.println("Enter booking id: ");
+        LocalDate end_date = LocalDate.parse(sc.nextLine());
+
+        System.out.println("Enter booking id: ");
+        int customer_id = sc.nextInt();
+
+        System.out.println("Enter booking id: ");
+        int room_id = sc.nextInt();
+
+        service.updateBooking(booking_id, start_date, end_date, customer_id, room_id);
     }
     private void deleteBooking(){
 
+        System.out.println("Enter booking id: ");
+        int booking_id = sc.nextInt();
+
+        service.deleteBooking(booking_id);
     }
 
     private int getAnInt(){
