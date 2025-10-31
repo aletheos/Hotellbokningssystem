@@ -63,25 +63,25 @@ public class BookingDAOImpl implements BookingDAO {
     public Booking getBooking(int booking_id) {
 
         String sql = "SELECT * FROM bookings WHERE booking_id = ?";
-        Booking booking;
+        Booking booking = null;
 
         try( Connection conn = Database.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)){
 
             ps.setInt(1, booking_id);
             ResultSet rs = ps.executeQuery();
-
-            booking = new Booking(
-                    rs.getInt("booking_id"),
-                    rs.getDate("start_date").toLocalDate(),
-                    rs.getDate("end_date").toLocalDate(),
-                    rs.getInt("customer_id"),
-                    rs.getInt("room_id")
-            );
+            while (rs.next()) {
+                booking = new Booking(
+                        rs.getInt("booking_id"),
+                        rs.getDate("start_date").toLocalDate(),
+                        rs.getDate("end_date").toLocalDate(),
+                        rs.getInt("customer_id"),
+                        rs.getInt("room_id")
+                );
+            }
 
         } catch(SQLException e){
             System.out.println("Get booking with id = " + booking_id + " failed.\n" + e.getMessage());
-            return null;
         }
 
         return booking;
