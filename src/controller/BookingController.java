@@ -24,12 +24,12 @@ public class BookingController {
 
         while(true){
             System.out.println("=== MENU ===");
-            System.out.println("1. Add room");
-            System.out.println("2. Show all rooms");
-            System.out.println("3. Show only available room");
-            System.out.println("4. Update room's price");
-            System.out.println("5. Update room's type");
-            System.out.println("6. Return");
+            System.out.println("1. Add booking");
+            System.out.println("2. Show all bookings");
+            System.out.println("3. Show booking");
+            System.out.println("4. Update booking");
+            System.out.println("5. Delete booking");
+            System.out.println("0. Return");
 
             int input = getAnInt();
 
