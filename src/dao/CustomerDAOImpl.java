@@ -76,28 +76,54 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public int updateCustomerCity(int id, String city) {
-        String sql = "UPDATE customers SET city = ? WHERE customer_id = ?";
+    public Customer findCustomerByID(int customer_id) {
+        String sql = "SELECT * FROM customers WHERE customer_id = ? LIMIT 1";
+        Customer customer = null;
+        try(
+            Connection connection = Database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setInt(1, customer_id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                customer = new Customer(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return customer;
+    }
+
+    @Override
+    public Customer updateCustomerCity(int customer_id, String city) {
+        String sql = "UPDATE customers SET city = ? WHERE customer_id = ? LIMIT 1";
         try(
             Connection connection = Database.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             statement.setString(1, city);
-            statement.setInt(2, id);
-            return statement.executeUpdate();
+            statement.setInt(2, customer_id);
+            statement.executeUpdate();
+            return findCustomerByID(customer_id);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public int deleteCustomer(int id) {
-        String sql = "DELETE FROM customers WHERE customer_id = ?";
+    public int deleteCustomer(int customer_id) {
+        String sql = "DELETE FROM customers WHERE customer_id = ? LIMIT 1";
         try(
             Connection connection = Database.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)
         ) {
-            statement.setInt(1, id);
+            statement.setInt(1, customer_id);
             return statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
