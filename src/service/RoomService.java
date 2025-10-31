@@ -1,5 +1,5 @@
 package service;
-/*
+
 import dao.RoomDAO;
 import model.Room;
 import model.Room.RoomType;
@@ -49,4 +49,3 @@ public class RoomService {
         return price != null && price.scale() <= 2 && price.compareTo(BigDecimal.ZERO) >= 0;
     }
 }
-*/
