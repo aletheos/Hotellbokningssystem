@@ -46,13 +46,23 @@ public class RoomController {
 
     private void addRoom(){
 
-        System.out.println("Room type: ");
-        Room.RoomType type = Room.RoomType.valueOf(sc.nextLine().toUpperCase());
+        System.out.println("Room type (DOUBLE_ROOM, SINGLE_ROOM, FAMILY_ROOM): ");
+        String typeInput = sc.nextLine().trim().toUpperCase();
 
-        System.out.println("Price: ");
-        BigDecimal price = sc.nextBigDecimal();
 
-        service.addRoom(type, price);
+
+        try {
+            Room.RoomType type = Room.RoomType.valueOf(typeInput);
+
+            System.out.println("Price: ");
+            BigDecimal price = sc.nextBigDecimal();
+            sc.nextLine();
+
+            service.addRoom(type, price);
+            System.out.println("Room added!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ogiltig rumtyp! Välj mellan: DOUBLE_ROOM, SINGLE_ROOM, FAMILY_ROOM");
+        }
     }
     private void getAllRooms(){
         for (Room r: service.getAllRooms()){
@@ -83,13 +93,21 @@ public class RoomController {
     private void updateRoomType(){
         System.out.println("Enter room id: ");
         int id = getAnInt();
-        System.out.println("Enter new type: ");
-        Room.RoomType type = Room.RoomType.valueOf(sc.nextLine().toUpperCase());
-        Optional<Room> result = service.updateRoomType(id, type );
+        System.out.println("Enter new type (DOUBLE_ROOM, SINGLE_ROOM, FAMILY_ROOM): ");
+        String input = sc.nextLine().trim().toUpperCase();
 
-        result.ifPresent(r -> System.out.println("Updated: " + r));
-        if(result.isEmpty()){
-            System.out.println("No room with the id: " + id + " is found. ");
+        try {
+            Room.RoomType type = Room.RoomType.valueOf(input);
+            Optional<Room> result = service.updateRoomType(id, type);
+
+            if (result.isPresent()) {
+                System.out.println("Uppdaterad: " + result.get());
+            } else {
+                System.out.println("Inget rum hittades med ID: " + id);
+            }
+
+        }catch(IllegalArgumentException e){
+            System.out.println("Ogiltig rumtyp! Välj mellan: DOUBLE_ROOM, SINGLE_ROOM, FAMILY_ROOM");
         }
     }
 
