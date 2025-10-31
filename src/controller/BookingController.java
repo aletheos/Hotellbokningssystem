@@ -1,8 +1,12 @@
 package controller;
 
 import dao.BookingDAOImpl;
+import model.Booking;
+import model.Customer;
 import service.BookingService;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class BookingController {
@@ -40,6 +44,44 @@ public class BookingController {
                 }
             }
         }
+
+    }
+
+    private void addBooking(){
+        System.out.println("Enter start date: ");
+        LocalDate start_date = LocalDate.parse(sc.nextLine());
+
+        System.out.println("Enter end date: ");
+        LocalDate end_date = LocalDate.parse(sc.nextLine());
+
+        System.out.println("Enter customer id: ");
+        int customer_id = sc.nextInt();
+
+        System.out.println("Enter room id: ");
+        int room_id = sc.nextInt();
+
+        service.addBooking( start_date, end_date, customer_id, room_id);
+    }
+
+    private void getAllBookings(){
+
+        for ( Booking b : service.getAllBookings()){
+            System.out.println(b);
+        }
+    }
+
+    private void getBooking(){
+
+        System.out.println("Enter booking id: ");
+        int booking_id = sc.nextInt();
+
+        System.out.println(service.getBooking(booking_id));
+    }
+
+    private void updateBooking(){
+
+    }
+    private void deleteBooking(){
 
     }
 
