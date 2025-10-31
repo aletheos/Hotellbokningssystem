@@ -7,6 +7,7 @@ public interface CustomerDAO {
     void addCustomer(Customer customer);
     List<Customer> getAllCustomers();
     Customer findCustomerByEmail(String email);
-    int updateCustomerCity(int id, String city);
-    int deleteCustomer(int id);
+    Customer findCustomerByID(int customer_id);
+    Customer updateCustomerCity(int customer_id, String city);
+    int deleteCustomer(int customer_id);
 }
