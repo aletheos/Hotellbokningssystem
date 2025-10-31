@@ -27,7 +27,7 @@ public class RoomController {
             System.out.println("3. Show only available room");
             System.out.println("4. Update room's price");
             System.out.println("5. Update room's type");
-            System.out.println("6. Return");
+            System.out.println("0. Return");
 
             int input = getAnInt();
 
@@ -56,15 +56,11 @@ public class RoomController {
         service.addRoom(type, price);
     }
     private List<Room> getAllRooms(){
-        for (Room r: service.getAllRooms()){
-            System.out.println(r);
-        }
+        return service.getAllRooms();
     }
 
-    private Optional<Room> getAvailableRooms(){
-        for (Room r: service.getAvailableRooms()){
-            System.out.println(r);
-        }
+    private List<Room> getAvailableRooms(){
+        return service.getAvailableRooms();
     }
 
     private void updateRoomPrice (){
