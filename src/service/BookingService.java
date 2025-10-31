@@ -40,6 +40,11 @@ public class BookingService {
         return dao.getAllBookings();
     }
 
+    public Booking getBooking(int booking_id){
+
+        return dao.getBooking(booking_id);
+    }
+
     public Optional<Booking> updateBooking(int booking_id, LocalDate start_date, LocalDate end_date, int customer_id, int room_id){
 
         Booking booking =  new Booking(booking_id, start_date, end_date, customer_id, room_id);
