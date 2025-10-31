@@ -83,7 +83,7 @@ public class RoomController {
 
     private void updateRoomType(){
         System.out.println("Enter room id: ");
-        int id = sc.nextInt();
+        int id = getAnInt();
         System.out.println("Enter new type: ");
         Room.RoomType type = Room.RoomType.valueOf(sc.nextLine().toUpperCase());
         Optional<Room> result = service.updateRoomType(id, type );
