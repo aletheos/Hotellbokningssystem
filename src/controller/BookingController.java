@@ -55,10 +55,10 @@ public class BookingController {
         LocalDate end_date = LocalDate.parse(sc.nextLine());
 
         System.out.println("Enter customer id: ");
-        int customer_id = sc.nextInt();
+        int customer_id = getAnInt();
 
         System.out.println("Enter room id: ");
-        int room_id = sc.nextInt();
+        int room_id = getAnInt();
 
         service.addBooking( start_date, end_date, customer_id, room_id);
     }
@@ -73,7 +73,7 @@ public class BookingController {
     private void getBooking(){
 
         System.out.println("Enter booking id: ");
-        int booking_id = sc.nextInt();
+        int booking_id = getAnInt();
 
         System.out.println(service.getBooking(booking_id));
     }
@@ -81,7 +81,7 @@ public class BookingController {
     private void updateBooking(){
 
         System.out.println("Enter booking id: ");
-        int booking_id = sc.nextInt();
+        int booking_id = getAnInt();
 
         System.out.println("Enter start date: ");
         LocalDate start_date = LocalDate.parse(sc.nextLine());
@@ -90,17 +90,17 @@ public class BookingController {
         LocalDate end_date = LocalDate.parse(sc.nextLine());
 
         System.out.println("Enter customer id: ");
-        int customer_id = sc.nextInt();
+        int customer_id = getAnInt();
 
         System.out.println("Enter room id: ");
-        int room_id = sc.nextInt();
+        int room_id = getAnInt();
 
         service.updateBooking(booking_id, start_date, end_date, customer_id, room_id);
     }
     private void deleteBooking(){
 
         System.out.println("Enter booking id: ");
-        int booking_id = sc.nextInt();
+        int booking_id = getAnInt();
 
         service.deleteBooking(booking_id);
     }
