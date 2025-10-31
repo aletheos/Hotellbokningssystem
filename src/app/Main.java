@@ -13,8 +13,8 @@ public class Main {
         try  (Connection conn = Database.getConnection()) {
             Hotel.getInstance().run();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
             System.out.println("Error connectin to Database: " + e.getMessage());
+            throw new RuntimeException(e);
         }
         System.out.println("Done");
     }
