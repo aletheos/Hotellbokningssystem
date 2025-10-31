@@ -18,11 +18,6 @@ public class Room {
         this.price = price;
     }
 
-    public Room(int roomId, RoomType type, BigDecimal price) {
-        this.roomId = roomId;
-        this.type = type;
-        this.price = price;
-    }
 
     public int getRoomId() {
         return roomId;
@@ -57,5 +52,4 @@ public class Room {
                 '}';
     }
 }
-
 
