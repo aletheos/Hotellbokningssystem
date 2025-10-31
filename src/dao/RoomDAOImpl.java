@@ -21,11 +21,10 @@ public class RoomDAOImpl implements RoomDAO {
         ) {
                 ps.setString(1, room.getType().name());
                 ps.setBigDecimal(2, room.getPrice());
-                ps.executeUpdate();
+                return ps.executeUpdate();
             } catch(SQLException e){
                 throw new RuntimeException(e);
             }
-        return 0;
     }
 
     @Override
