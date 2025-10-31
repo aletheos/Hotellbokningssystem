@@ -51,7 +51,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public List<Room> getAvailableRooms(LocalDate start, LocalDate end){
+    public List<Room>  getAvailableRooms(LocalDate start, LocalDate end){
        List<Room> rooms = new ArrayList<>();
         String sql = """
         SELECT r.room_id, r.type, r.price
