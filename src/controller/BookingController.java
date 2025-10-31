@@ -83,16 +83,16 @@ public class BookingController {
         System.out.println("Enter booking id: ");
         int booking_id = sc.nextInt();
 
-        System.out.println("Enter booking id: ");
+        System.out.println("Enter start date: ");
         LocalDate start_date = LocalDate.parse(sc.nextLine());
 
-        System.out.println("Enter booking id: ");
+        System.out.println("Enter end date: ");
         LocalDate end_date = LocalDate.parse(sc.nextLine());
 
-        System.out.println("Enter booking id: ");
+        System.out.println("Enter customer id: ");
         int customer_id = sc.nextInt();
 
-        System.out.println("Enter booking id: ");
+        System.out.println("Enter room id: ");
         int room_id = sc.nextInt();
 
         service.updateBooking(booking_id, start_date, end_date, customer_id, room_id);

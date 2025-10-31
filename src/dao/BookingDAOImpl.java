@@ -10,46 +10,6 @@ import java.util.List;
 
 public class BookingDAOImpl implements BookingDAO {
 
-    /*
-    * CRUD
-    * CREATE    -> addBooking()
-    * READ      -> getAllBookings()
-    * READ      -> getBooking()
-    * UPDATE    -> updateBooking()
-    * DELETE    -> deleteBooking()
-    * */
-
-    /*
-    * import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.ZonedDateTime;
-import java.util.Locale;
-
-// Aktuellt datum
-LocalDate idag = LocalDate.now();
-
-// Specifikt datum
-LocalDate datum = LocalDate.of(2025, 10, 30);
-
-// Formatera datum enligt svensk locale
-DateTimeFormatter svenskFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("sv", "SE"));
-String formateratDatum = idag.format(svenskFormat);
-
-// Eller med förvalt mönster för locale
-DateTimeFormatter localFormat = DateTimeFormatter.ofLocalizedDate(java.time.format.FormatStyle.FULL)
-    .withLocale(new Locale("sv", "SE"));
-String svensktDatum = idag.format(localFormat); // "torsdag 30 oktober 2025"
-
-// Parsa datum från sträng
-LocalDate parsatDatum = LocalDate.parse("2025-10-30", svenskFormat);
-
-    *
-    *
-    *
-    * */
-
-
     @Override
     public void addBooking(Booking booking){
 
