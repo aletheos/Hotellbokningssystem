@@ -10,7 +10,11 @@ import java.util.Optional;
 
 public class BookingService {
 
-    BookingDAO dao = new BookingDAOImpl();
+    private final BookingDAO dao;
+
+    public BookingService(BookingDAO dao) {
+        this.dao = dao;
+    }
 
     public void addBooking(LocalDate start_date, LocalDate end_date, int customer_id, int room_id){
 

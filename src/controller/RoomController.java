@@ -1,5 +1,6 @@
 package controller;
 
+import dao.RoomDAOImpl;
 import model.Room;
 import service.RoomService;
 
@@ -9,13 +10,13 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class RoomController {
-   public final RoomService service;
-
+   private final RoomService service;
 
     Scanner sc = new Scanner(System.in);
 
-    public RoomController(RoomService service) {
-        this.service = service;
+    public RoomController() {
+        RoomDAOImpl dao = new RoomDAOImpl();
+        this.service = new RoomService(dao);
     }
 
     public void runMenu (){
