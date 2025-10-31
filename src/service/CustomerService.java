@@ -29,26 +29,27 @@ public class CustomerService {
         return Optional.ofNullable(dao.findCustomerByEmail(norm));
     }
 
-    public void addCustomer(String name, String email, String city) {
+    public boolean addCustomer(String name, String email, String city) {
         if (name == null || name.isBlank()) {
             System.out.println("Name cannot be empty");
-            return;
+            return false;
         }
         if (city == null || city.isBlank()) {
             System.out.println("City cannot be empty");
-            return;
+            return false;
         }
         if (!isValidEmail(email)) {
             System.out.println("Email is not valid");
-            return;
+            return false;
         }
         String normEmail = normalizeEmail(email);
         if (dao.findCustomerByEmail(normEmail) != null) {
             System.out.println("Customer with this email already exists");
-            return;
+            return false;
         }
 
         dao.addCustomer(new Customer(name.trim(), normEmail, city.trim()));
+        return true;
     }
 
     public int deleteCustomer(int customer_id) {
