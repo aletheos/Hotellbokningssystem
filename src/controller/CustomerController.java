@@ -53,9 +53,13 @@ public class CustomerController {
         System.out.println("City: ");
         String city = sc.nextLine();
 
+        boolean success = service.addCustomer(name, email, city);
 
-        service.addCustomer(name,email,city);
-        System.out.println("Customer added successfully: " + name + ", " + email + ", " + city);
+        if (success) {
+            System.out.println("Customer added successfully: " + name + ", " + email + ", " + city);
+        } else {
+            System.out.println("Customer was NOT added.");
+        }
     }
 
     private void getAllCustomers(){
