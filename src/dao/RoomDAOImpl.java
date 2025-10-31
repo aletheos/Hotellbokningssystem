@@ -15,15 +15,17 @@ public class RoomDAOImpl implements RoomDAO {
     @Override
     public int addRoom(Room room){
         String sql = "INSERT INTO rooms (type, price) VALUES ( ?, ?) ";
-        try(Connection conn = Database.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+        try(
+                Connection conn = Database.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
                 ps.setString(1, room.getType().name());
                 ps.setBigDecimal(2, room.getPrice());
-                return ps.executeUpdate();
+                ps.executeUpdate();
             } catch(SQLException e){
-                e.printStackTrace();
-                return 0;
+                throw new RuntimeException(e);
             }
+        return 0;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public List<Room> getAvailableRooms(LocalDate start, LocalDate end){
+    public List<Room>  getAvailableRooms(LocalDate start, LocalDate end){
        List<Room> rooms = new ArrayList<>();
         String sql = """
         SELECT r.room_id, r.type, r.price

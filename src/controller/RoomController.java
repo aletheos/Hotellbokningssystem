@@ -5,7 +5,6 @@ import model.Room;
 import service.RoomService;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -27,7 +26,7 @@ public class RoomController {
             System.out.println("3. Show only available room");
             System.out.println("4. Update room's price");
             System.out.println("5. Update room's type");
-            System.out.println("6. Return");
+            System.out.println("0. Return");
 
             int input = getAnInt();
 
@@ -55,13 +54,13 @@ public class RoomController {
 
         service.addRoom(type, price);
     }
-    private List<Room> getAllRooms(){
+    private void getAllRooms(){
         for (Room r: service.getAllRooms()){
             System.out.println(r);
         }
     }
 
-    private Optional<Room> getAvailableRooms(){
+    private void getAvailableRooms(){
         for (Room r: service.getAvailableRooms()){
             System.out.println(r);
         }

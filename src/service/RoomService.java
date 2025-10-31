@@ -22,10 +22,17 @@ public class RoomService {
         return dao.getAllRooms();
     }
 
-    public boolean addRoom(RoomType type, BigDecimal price) {
-        if (type == null || !isValidPrice(price)) return false;
+    public void addRoom(RoomType type, BigDecimal price) {
+        if (type == null || !isValidPrice(price)) {
+            System.out.println("Invalid input");
+            return;
+        }
         int rows = dao.addRoom(new Room(type, price));
-        return rows > 0;
+        if (rows > 0) {
+            System.out.println("Room added.");
+        } else {
+            System.out.println("Failed to add room.");
+        }
     }
 
     public Optional<Room> updateRoomPrice(int roomId, BigDecimal newPrice) {
