@@ -78,25 +78,25 @@ public class CustomerController {
 
     private void deleteCustomer() {
         System.out.println("Write the id of the customer you want to delete: ");
-        int id = getAnInt();
+        int customer_id = getAnInt();
 
-        if (service.deleteCustomer(id) > 0){
-            System.out.println("Successfully deleted customer with email: " + id);
-        } else System.out.println("No customer with " + id + " id was found.");
+        if (service.deleteCustomer(customer_id) > 0){
+            System.out.println("Successfully deleted customer with email: " + customer_id);
+        } else System.out.println("No customer with " + customer_id + " id was found.");
 
     }
 
     private void updateCustomerCity() {
         System.out.println("Enter customer id: ");
-        int id = getAnInt();
+        int customer_id = getAnInt();
         System.out.println("New city:");
         String city = sc.nextLine();
 
-        Optional<Customer> result = service.updateCustomerCity(id,city);
+        Optional<Customer> result = service.updateCustomerCity(customer_id,city);
 
         result.ifPresent(p -> System.out.println("Updated: "+ p));
         if(result.isEmpty()){
-            System.out.println("No customer with " + id + " id was found.");
+            System.out.println("No customer with " + customer_id + " id was found.");
         }
     }
 

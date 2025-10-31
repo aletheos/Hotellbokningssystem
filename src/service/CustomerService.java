@@ -51,26 +51,14 @@ public class CustomerService {
         dao.addCustomer(new Customer(name.trim(), normEmail, city.trim()));
     }
 
-    public int deleteCustomer(String email) {
-        if (!isValidEmail(email)) return 0;
-        String norm = normalizeEmail(email);
-        Customer customer = dao.findCustomerByEmail(norm);
-        int id = customer.getCustomerId();
-        return dao.deleteCustomer(id);
+    public int deleteCustomer(int customer_id) {
+        return dao.deleteCustomer(customer_id);
     }
 
-    public Optional<Customer> updateCustomerCity(String email, String city) {
-        if (!isValidEmail(email) || city == null || city.isBlank()) {
-            return Optional.empty();
-        }
-        String norm = normalizeEmail(email);
-        Customer customer = dao.findCustomerByEmail(norm);
-        int id = customer.getCustomerId();
-        int updated = dao.updateCustomerCity(id, city.trim());
-        if (updated > 0) {
-            return Optional.ofNullable(dao.findCustomerByEmail(norm));
-        }
-        return Optional.empty();
+    public Optional<Customer> updateCustomerCity(int customer_id, String city) {
+        return Optional.ofNullable(
+            dao.updateCustomerCity(customer_id, city.trim())
+        );
     }
 
     private static boolean isValidEmail(String email) {
