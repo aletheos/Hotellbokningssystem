@@ -40,7 +40,9 @@ public class RoomDAOImpl implements RoomDAO {
                 String typeStr = rs.getString("type");
                 Room.RoomType type = Room.RoomType.valueOf(typeStr);
                 BigDecimal price = rs.getBigDecimal("price");
+                int id = rs.getInt("room_id");
                 Room room = new Room(
+                        id,
                         type,
                         price
                 );
@@ -61,7 +63,7 @@ public class RoomDAOImpl implements RoomDAO {
         WHERE r.room_id NOT IN (
             SELECT b.room_id
             FROM bookings b
-            WHERE NOT (b.end_date < ? OR b.start_date > ?)
+            WHERE NOT (b.end_date <= ? OR b.start_date >= ?)
         )
         """;
 
@@ -75,7 +77,8 @@ public class RoomDAOImpl implements RoomDAO {
                     String typeStr = rs.getString("type");
                     Room.RoomType type = Room.RoomType.valueOf(typeStr);
                     BigDecimal price = rs.getBigDecimal("price");
-                    rooms.add(new Room(type, price));
+                    int id = rs.getInt("room_id");
+                    rooms.add(new Room(id,type, price));
                 }
             }
         } catch (SQLException e) {
